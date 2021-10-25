@@ -42,7 +42,7 @@
                                     <td>
                                         <a href="{{ route('banners.edit', $banner->id) }}">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                             | <a href="{{ route('banners.destroy', $banner->id) }}">
+                                             | <a class="delete-row" href="{{ route('banners.destroy', $banner->id) }}">
                                                  <i class="fa fa-trash-o" style="color:red" aria-hidden="true"></i>
                                              </a>
                                         </a>

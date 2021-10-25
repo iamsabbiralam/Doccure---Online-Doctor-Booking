@@ -226,9 +226,9 @@
                 </div>
             </div>
             <!-- /Page Wrapper -->
-            <form id="delete-from" action="" method="post">
+            <form id="delete-from" action="" method="POST">
                 @csrf
-                <input type="hidden" id="method" name="_method" value="DELETE">
+                <input type="hidden" value="DELETE" name="_method">
             </form>
         </div>
 		<!-- /Main Wrapper -->
@@ -252,20 +252,15 @@
 		<script  src="{{ asset('admin/assets/js/script.js') }}"></script>
 
         <script>
-                $(document).on('click','.delete-row',function (e){
-
-                e.preventDefault();
-                let confrimStr = "Are you sure?"
-                if($(this).attr("data-confirm")){
-                    confirmStr = $(this).attr("data-confirm");
-                    }
-                    if(confirm(confirmStr)) {
-                        let href = $(this).attr("href");
-               $("#delete-from").attr("action",href);
-               $("#delete-from").submit();
-               }
-            })
-        </script>
+    $(document).on('click', '.delete-row', function (e) {
+        e.preventDefault();
+        if (confirm("Are You Sure")) {
+            let href = $(this).attr('href');
+            $("#delete-from").attr("action", href);
+            $("#delete-from").submit();
+        }
+    })
+</script>
 
     </body>
 

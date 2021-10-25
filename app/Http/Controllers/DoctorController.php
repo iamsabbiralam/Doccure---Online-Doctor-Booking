@@ -109,10 +109,10 @@ class DoctorController extends Controller
      */
     public function destroy(Doctor $doctor)
     {
-        dd($doctor);
-        // if($doctor->delete()) {
-        //     return redirect()->route('doctors.index')->with("SUCCESS", __("Doctor has been deleted successfully"));
-        // }
-        // return redirect()->back()->withInput()->with("ERROR", __("Failed to deleted"));
+        // dd($doctor);
+        if($doctor->delete()) {
+            return redirect()->route('doctors.index')->with("SUCCESS", __("Doctor has been deleted successfully"));
+        }
+        return redirect()->back()->withInput()->with("ERROR", __("Failed to deleted"));
     }
 }

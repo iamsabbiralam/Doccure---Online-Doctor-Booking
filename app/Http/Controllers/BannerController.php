@@ -111,7 +111,7 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
-         dd($banner);
+        //  dd($banner);
         // if($banner->banner) {
         //     storage::delete($banner->banner);
         //     return redirect()->route('banners.index')->with('SUCCESS', __('Banner has been deleted successfully'));

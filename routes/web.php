@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +19,14 @@ use App\Http\Controllers\BannerController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontController::class, 'welcomePage'])->name('welcome');
 
 Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('banners', BannerController::class);
+Route::resource('doctors', DoctorController::class);
+Route::resource('categories', CategoryController::class);

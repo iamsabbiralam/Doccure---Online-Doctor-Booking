@@ -4,5 +4,5 @@
         <input class="form-control" type="file" name="banner" id="banner">
         <p class="text-red-600">{{ $errors->first('banner') }}</p>
     </div>
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="px-4 py-2 bg-green-600" type="submit">{{ $buttonText }}</button>
 </div>

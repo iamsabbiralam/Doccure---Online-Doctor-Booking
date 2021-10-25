@@ -191,10 +191,11 @@
 								<a href="appointment-list.html"><i class="fe fe-layout"></i> <span>Appointments</span></a>
 							</li>
 							<li>
-								<a href="specialities.html"><i class="fe fe-users"></i> <span>Specialities</span></a>
+								<a href="{{ route('categories.index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i>
+                                <span>Category</span></a>
 							</li>
 							<li>
-								<a href="doctor-list.html"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
+								<a href="{{ route('doctors.index') }}"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
 							</li>
 							<li>
 								<a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
@@ -207,6 +208,16 @@
                 </div>
             </div>
 			<!-- /Sidebar -->
+            @if (session('SUCCESS'))
+                <div class="alert alert-success">
+                    {{ session('SUCCESS') }}
+                </div>
+            @endif
+            @if (session('ERROR'))
+                <div class="alert alert-danger">
+                    {{ session('ERROR') }}
+                </div>
+            @endif
             <!-- Page Wrapper -->
             <div class="page-wrapper">
                 <div class="content container-fluid">
@@ -215,8 +226,13 @@
                 </div>
             </div>
             <!-- /Page Wrapper -->
+            <form id="delete-from" action="" method="post">
+                @csrf
+                <input type="hidden" id="method" name="_method" value="DELETE">
+            </form>
         </div>
 		<!-- /Main Wrapper -->
+
 
 		<!-- jQuery -->
         <script src="{{ asset('admin/assets/js/jquery-3.2.1.min.js') }}"></script>
@@ -234,6 +250,22 @@
 
 		<!-- Custom JS -->
 		<script  src="{{ asset('admin/assets/js/script.js') }}"></script>
+
+        <script>
+                $(document).on('click','.delete-row',function (e){
+
+                e.preventDefault();
+                let confrimStr = "Are you sure?"
+                if($(this).attr("data-confirm")){
+                    confirmStr = $(this).attr("data-confirm");
+                    }
+                    if(confirm(confirmStr)) {
+                        let href = $(this).attr("href");
+               $("#delete-from").attr("action",href);
+               $("#delete-from").submit();
+               }
+            })
+        </script>
 
     </body>
 

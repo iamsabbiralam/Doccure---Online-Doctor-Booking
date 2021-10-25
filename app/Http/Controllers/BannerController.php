@@ -40,17 +40,18 @@ class BannerController extends Controller
     {
         // dd($request->all());
 
-        if($request->hasFile('banner')) {
-            $path = $request->file('banner')->store('images/banner');
-            if(!$path) {
-                return redirect()->back()->with('ERROR', __('Failed to upload banner'));
-            }
-            $banner = Banner::create([
-                'banner' => $path,
-            ]);
-            return redirect()->route('banners.index')->with("SUCCESS", __('Banner has been uploaded successfully'));
+        $path = $request->file('banner')->store('images/banner');
+        if(!$path) {
+            return redirect()->back()->with("ERROR", __("Failed to upload image"));
         }
-        return redirect()->back()->with('ERROR', __('Failed to upload banner'));
+
+        $banner = Banner::create([
+            'banner' => $path,
+        ]);
+        if(empty($banner)) {
+            return redirect()->back();
+        }
+        return redirect()->route('banners.index')->with("SUCCESS", __("Banner has been created successfully"));
     }
 
     /**
@@ -95,7 +96,7 @@ class BannerController extends Controller
 
         }
         if($banner->update([
-            $banner->banner => $path,
+            'banner' => $path,
         ])) {
             return redirect()->route('banners.index')->with('SUCCESS', __('Banner has been updated successfully'));
         }
@@ -110,7 +111,7 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
-        dd($banner);
+         dd($banner);
         // if($banner->banner) {
         //     storage::delete($banner->banner);
         //     return redirect()->route('banners.index')->with('SUCCESS', __('Banner has been deleted successfully'));

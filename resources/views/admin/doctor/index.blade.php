@@ -29,6 +29,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Category</th>
                                 <th>Specialist</th>
                                 <th>Chamber</th>
                                 <th>Visit</th>
@@ -40,6 +41,7 @@
                                 <tr>
                                     <td>{{ $doctor->id }}</td>
                                     <td>{{ $doctor->name }}</td>
+                                    <td>{{ $doctor->categories->name }}</td>
                                     <td>{{ $doctor->specialist }}</td>
                                     <td>{{ $doctor->chamber }}</td>
                                     <td>{{ $doctor->cost }}</td>
@@ -47,10 +49,9 @@
                                         <a href="{{ route('doctors.edit', $doctor->id) }}">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
-                                             {{-- | <a href="{{ route('doctors.destroy', $doctor->id) }}">
-                                                 <i class="fa fa-trash-o" style="color:red" aria-hidden="true"></i>
-                                            </a> --}}
-                                            <a href="{{route('doctors.destroy', $doctor->id)}}">delete</a>
+                                        | <a class="delete-row" href="{{ route('doctors.destroy', $doctor->id) }}">
+                                            <i class="fa fa-trash-o" style="color:red" aria-hidden="true"></i>
+                                            </a>
                                     </td>
                                 </tr>
                             @empty

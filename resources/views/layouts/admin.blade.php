@@ -188,7 +188,7 @@
 								<a href="{{ route('admin.home') }}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
 							</li>
 							<li>
-								<a href="appointment-list.html"><i class="fe fe-layout"></i> <span>Appointments</span></a>
+								<a href="{{ route('appointment.index') }}"><i class="fe fe-layout"></i> <span>Appointments</span></a>
 							</li>
 							<li>
 								<a href="{{ route('categories.index') }}"><i class="fa fa-list-alt" aria-hidden="true"></i>
@@ -196,9 +196,6 @@
 							</li>
 							<li>
 								<a href="{{ route('doctors.index') }}"><i class="fe fe-user-plus"></i> <span>Doctors</span></a>
-							</li>
-							<li>
-								<a href="patient-list.html"><i class="fe fe-user"></i> <span>Patients</span></a>
 							</li>
                             <li>
 								<a href="{{ route('banners.index') }}"><i class="fa fa-file-image-o"></i> <span>Banners</span></a>

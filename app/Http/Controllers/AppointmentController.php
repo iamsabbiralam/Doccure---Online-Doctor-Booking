@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AppointmentController extends Controller
 {
@@ -14,7 +17,10 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        $data['appointments'] = Appointment::with(['user', 'doctor'])->get();
+        // dd($data);
+
+        return view('admin.appointment.index', $data);
     }
 
     /**
@@ -22,9 +28,11 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $data['doctor_id'] = $id;
+
+        return view('appointment.create', $data);
     }
 
     /**
@@ -35,7 +43,36 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+
+        $request->validate([
+            'date' => 'required',
+        ]);
+
+        $user = Auth::user()->id;
+        $id = $request->doctor_id;
+
+        $appointment = Appointment::create([
+            'user_id' => $user,
+            'doctor_id' => $id,
+            'date' => $request->get('date'),
+        ]);
+
+        // $user = User::find($user);
+
+        // $data = [
+        //   'name' => $user->name,
+        //   'email' => $user->email,
+        // ];
+
+        //     Mail::send('email-template', $data, function($message) use ($data) {
+        //       $message->to($data['email'])
+        //       ->subject('Appointment Details');
+        //     });
+        if(empty($appointment)) {
+            return redirect()->back()->withInput()->with("ERROR", __('Appointment failed'));
+        }
+        return redirect()->route('doctors')->with("SUCCESS", __('Appointment has been booked'));
     }
 
     /**

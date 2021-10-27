@@ -62,18 +62,7 @@
 								<a href="index.html">Home</a>
 							</li>
 							<li class="has-submenu">
-								<a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
-								<ul class="submenu">
-									<li><a href="doctor-dashboard.html">Doctor Dashboard</a></li>
-									<li><a href="appointments.html">Appointments</a></li>
-									<li><a href="schedule-timings.html">Schedule Timing</a></li>
-									<li><a href="my-patients.html">Patients List</a></li>
-
-
-
-
-
-								</ul>
+								<a href="{{ route('doctors') }}">Doctors</a>
 							</li>
 							<li class="has-submenu">
 								<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
@@ -89,10 +78,6 @@
 							<li class="has-submenu">
 								<a href="#">Pages <i class="fas fa-chevron-down"></i></a>
 								<ul class="submenu">
-
-
-
-
 									<li><a href="login.html">Login</a></li>
 									<li><a href="register.html">Register</a></li>
 									<li><a href="forgot-password.html">Forgot Password</a></li>
@@ -116,9 +101,18 @@
 								<p class="contact-info-header"> +1 315 369 5943</p>
 							</div>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link header-login" href="{{ route('login') }}">login / Signup </a>
-						</li>
+						@if (!Auth::check('email'))
+                            <li class="nav-item">
+							    <a class="nav-link header-login" href="{{ route('login') }}">login / Signup </a>
+						    </li>
+                        @else
+                        <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        </form>
+                        @endif
 					</ul>
 				</nav>
 			</header><!-- /Header -->

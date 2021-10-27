@@ -8,8 +8,8 @@
     <div class="col-md-10">
         <select class="form-control" name="cat_id" id="cat_id">
             <option value="">Select Category</option>
-            @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @foreach ($categories as $key => $value)
+                <option value="{{ $key }}">{{ $value }}</option>
             @endforeach
         </select>
         <p class="text-red-600">{{ $errors->first('cat_id') }}</p>

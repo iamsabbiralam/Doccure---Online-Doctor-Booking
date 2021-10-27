@@ -2,7 +2,7 @@
 @section('container')
 
 <section>
-    {{-- <div class="container-fluid">
+    <div class="container-fluid">
         <div class="banner-wrapper">
             <div class="banner-header text-center">
                 <h1>Make an Appointment</h1>
@@ -11,39 +11,33 @@
 
             <!-- Search -->
             <div class="search-box">
-
-            </div>
+                <form action="{{ route('search') }}" method="post">
+                    @csrf
+                    <input type="text" placeholder="Search.." name="search" class="form-control search">
+                </form>
+            </div><br><br>
             <!-- /Search -->
 
         </div>
-    </div> --}}
-    {{-- <div class="container-lg my-3">
-        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-            <!-- Carousel indicators -->
-            <ol class="carousel-indicators">
-                <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
-                <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
-                <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
-            </ol>
+    </div>
 
-            <!-- Wrapper for carousel items -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    @foreach ($banners as $banner)
-                        <img src="{{ asset($banner->banner) }}" class="d-block w-100" alt="Slide 1">
-                    @endforeach
-                </div>
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach ($banners as $banner)
+            <div class="carousel-item @if ($banner->id == $banners[0]['id']) active @endif">
+                <img class="d-block w-100" src="{{ asset($banner->banner) }}" alt="First slide">
             </div>
-
-            <!-- Carousel controls -->
-            <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </a>
+            @endforeach
         </div>
-    </div> --}}
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 
 
 </section>
@@ -60,57 +54,17 @@
             <div class="col-md-9">
                 <!-- Slider -->
                 <div class="specialities-slider slider">
-
                     <!-- Slider Item -->
-                    <div class="speicality-item text-center">
-                        <div class="speicality-img">
-                            <img src="{{ asset('front/assets/img/specialities/specialities-01.png') }}" class="img-fluid" alt="Speciality">
-                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                    @foreach ($categories as $category)
+                        <div class="speicality-item text-center">
+                            <div class="speicality-img">
+                                <img src="{{ asset($category->image) }}" class="image" alt="Speciality" width="100" height="100">
+                                <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                            </div>
+                            <p>{{ $category->name }}</p>
                         </div>
-                        <p>Urology</p>
-                    </div>
+                    @endforeach
                     <!-- /Slider Item -->
-
-                    <!-- Slider Item -->
-                    <div class="speicality-item text-center">
-                        <div class="speicality-img">
-                            <img src="{{ asset('front/assets/img/specialities/specialities-02.png') }}" class="img-fluid" alt="Speciality">
-                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                        </div>
-                        <p>Neurology</p>
-                    </div>
-                    <!-- /Slider Item -->
-
-                    <!-- Slider Item -->
-                    <div class="speicality-item text-center">
-                        <div class="speicality-img">
-                            <img src="{{ asset('front/assets/img/specialities/specialities-03.png') }}" class="img-fluid" alt="Speciality">
-                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                        </div>
-                        <p>Orthopedic</p>
-                    </div>
-                    <!-- /Slider Item -->
-
-                    <!-- Slider Item -->
-                    <div class="speicality-item text-center">
-                        <div class="speicality-img">
-                            <img src="{{ asset('front/assets/img/specialities/specialities-04.png') }}" class="img-fluid" alt="Speciality">
-                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                        </div>
-                        <p>Cardiologist</p>
-                    </div>
-                    <!-- /Slider Item -->
-
-                    <!-- Slider Item -->
-                    <div class="speicality-item text-center">
-                        <div class="speicality-img">
-                            <img src="{{ asset('front/assets/img/specialities/specialities-05.png') }}" class="img-fluid" alt="Speciality">
-                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                        </div>
-                        <p>Dentist</p>
-                    </div>
-                    <!-- /Slider Item -->
-
                 </div>
                 <!-- /Slider -->
 

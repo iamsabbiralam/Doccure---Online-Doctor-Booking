@@ -15,7 +15,8 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $data['doctors'] = Doctor::all();
+        $data['doctors'] = Doctor::with('categories')->get();
+        // dd($data);
 
         return view('admin.doctor.index', $data);
     }
@@ -27,7 +28,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        $data['categories'] = Category::all();
+        $data['categories'] = Category::pluck('name', 'id');
 
         return view('admin.doctor.create', $data);
     }
@@ -74,7 +75,7 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
-        dd('ok');
+        $data['categories'] = Category::all();
         $data['doctor'] = $doctor;
 
         return view('admin.doctor.edit', $data);
